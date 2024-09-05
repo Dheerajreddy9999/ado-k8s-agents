@@ -24,8 +24,8 @@ RUN chmod +x ./start.sh
 
 # Create agent user and set up home directory
 RUN useradd -m -d /home/agent agent
-RUN echo azuredevops ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/azuredevops \
-     && chmod 0440 /etc/sudoers.d/azuredevops
+RUN echo agent ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/agent \
+     && chmod 0440 /etc/sudoers.d/agent
 RUN chown -R agent:agent /azp /home/agent
 
 USER agent
