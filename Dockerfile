@@ -3,7 +3,7 @@ ENV TARGETARCH="linux-x64"
 # Also can be "linux-arm", "linux-arm64".
 
 RUN apt update
-RUN apt upgrade -y
+
 RUN apt install -y curl git jq libicu70 curl sudo ca-certificates
 
 # install docker-cli
