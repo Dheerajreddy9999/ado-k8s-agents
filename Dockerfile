@@ -4,7 +4,7 @@ ENV TARGETARCH="linux-x64"
 
 RUN apt update
 
-RUN apt install -y curl git jq libicu70 curl sudo ca-certificates
+RUN apt install -y curl git jq libicu70 curl sudo ca-certificates nano
 
 # install docker-cli
 RUN sudo install -m 0755 -d /etc/apt/keyrings \
