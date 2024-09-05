@@ -15,7 +15,7 @@ RUN echo \
     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 RUN apt update \
-     && apt install docker-ce-cli 
+     && apt install docker-ce-cli -y
 
 WORKDIR /azp/
 
