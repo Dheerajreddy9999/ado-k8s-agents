@@ -13,9 +13,9 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'dockerHub'
-    repository: 'dheerajlearningdocker/ado-k8s-agent'
+    repository: 'dheerajlearningdocker/nginx'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Dockerfile: '**/Dockerfile1'
     tags: 'latest'
     addPipelineData: false
     addBaseImageData: false
