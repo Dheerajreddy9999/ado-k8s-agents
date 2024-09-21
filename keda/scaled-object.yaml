@@ -1,0 +1,20 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: azure-pipelines-scaledobject
+spec:
+  scaleTargetRef:
+    name: ado-agents #Target agent deployment name
+  minReplicaCount: 1
+  maxReplicaCount: 5 #Maximum number of parallel instances
+  triggers:
+  - type: azure-pipelines
+    metadata:
+      poolName: linux-agent
+      poolID: "10" #Replace with your agent pool ID
+      organizationURLFromEnv: https://dev.azure.com/dheerajreddy781
+      targetPipelinesQueueLength: "0"
+      personalAccessTokenFromEnv: "7vpnwrg4w3b2toqyqukfw2qp3ix7xl5jxktptjykflbx4yshcopq"
+      demands: Agent.OS -equals Linux
+    # authenticationRef:
+    #  name: pipeline-trigger-auth

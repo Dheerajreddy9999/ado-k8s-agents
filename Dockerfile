@@ -2,20 +2,18 @@ FROM ubuntu:22.04
 ENV TARGETARCH="linux-x64"
 # Also can be "linux-arm", "linux-arm64".
 
-RUN apt update
-
-RUN apt install -y curl git jq libicu70 curl sudo ca-certificates nano
-
-# install docker-cli
-RUN sudo install -m 0755 -d /etc/apt/keyrings \
-    && sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \
-    && sudo chmod a+r /etc/apt/keyrings/docker.asc
-RUN echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
 RUN apt update \
-     && apt install docker-ce-cli -y
+    && apt install -y curl git jq libicu70 curl sudo ca-certificates nano \
+    && sudo install -m 0755 -d /etc/apt/keyrings \
+    && sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \
+    && sudo chmod a+r /etc/apt/keyrings/docker.asc \
+    && echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null \
+    && apt update \
+     && apt install docker-ce-cli -y \
+    && curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash \
+    && az aks install-cli
 
 WORKDIR /azp/
 
