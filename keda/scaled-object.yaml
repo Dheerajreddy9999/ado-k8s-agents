@@ -12,9 +12,9 @@ spec:
     metadata:
       poolName: linux-agent
       poolID: "10" #Replace with your agent pool ID
-      organizationURLFromEnv: "h"
+      organizationURLFromEnv: ""
       targetPipelinesQueueLength: "0"
-      personalAccessTokenFromEnv: "j"
+      personalAccessTokenFromEnv: ""
       demands: Agent.OS -equals Linux
     # authenticationRef:
     #  name: pipeline-trigger-auth
