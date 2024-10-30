@@ -8,14 +8,6 @@ trigger: none
 pool: linux-agent
 
 steps:
-- script: echo Hello, world!
+- script: |
+        sleep 300
   displayName: 'Run a one-line script'
-- task: Docker@2
-  inputs:
-    containerRegistry: 'dockerHub'
-    repository: 'dheerajlearningdocker/nginx'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile1'
-    tags: 'latest'
-    addPipelineData: false
-    addBaseImageData: false

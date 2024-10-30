@@ -25,20 +25,11 @@ spec:
           # - name: DOCKER_TLS_CERTDIR
           #   value: /certs
           - name: AZP_URL
-            valueFrom:
-              secretKeyRef:
-                name: azdevops
-                key: AZP_URL
+            value: "https://dev.azure.com/dheerajreddy781"
           - name: AZP_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: azdevops
-                key: AZP_TOKEN
+            value: "iu3yudrqobjmdkssq7d6odw6hd3s2a7ydztzw4fbrnt5gvtslmpa"
           - name: AZP_POOL
-            valueFrom:
-              secretKeyRef:
-                name: azdevops
-                key: AZP_POOL
+            value: "linux-agent"
         # volumeMounts:
         #   - name: docker-tls-certdir
         #     mountPath: /certs
