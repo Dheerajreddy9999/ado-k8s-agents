@@ -25,11 +25,10 @@ spec:
           # - name: DOCKER_TLS_CERTDIR
           #   value: /certs
           - name: AZP_URL
-            value: "https://dev.azure.com/dheerajreddy781"
+            value: ""
           - name: AZP_TOKEN
-            value: "iu3yudrqobjmdkssq7d6odw6hd3s2a7ydztzw4fbrnt5gvtslmpa"
-          - name: AZP_POOL
-            value: "linux-agent"
+            value: ""
+            value: linux-agent
         # volumeMounts:
         #   - name: docker-tls-certdir
         #     mountPath: /certs
@@ -38,9 +37,9 @@ spec:
         command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
         securityContext:
           privileged: true
-        # env:
-        #   - name: DOCKER_TLS_CERTDIR
-        #     value: /certs
+        env:
+          - name: DOCKER_TLS_CERTDIR
+            value: /certs
         # volumeMounts:
         #  - name: docker-tls-certdir
         #    mountPath: /certs
