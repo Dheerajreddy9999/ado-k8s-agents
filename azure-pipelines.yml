@@ -7,14 +7,6 @@ trigger: none
 
 pool: linux-agent
 
-resources:
-  repositories:
-    - repository: mygithubrepo 
-      type: github
-      name: Dheerajreddy9999/ado-k8s-agents
-      endpoint: github connection
-      ref: main 
-
 steps:
 - checkout: self
 - script: |
