@@ -1,0 +1,64 @@
+{{- if .Values.ado.keda.enabled }}
+apiVersion: keda.sh/v1alpha1
+kind: ScaledJob
+metadata:
+  name: azdevops-scaledjob
+spec:
+  jobTargetRef:
+    ttlSecondsAfterFinished: 10
+    template:
+      spec:
+        serviceAccountName: ado-service-account
+        containers:
+        - name: azdevops-agent-job
+          image: {{ .Values.ado.image }}
+          imagePullPolicy: Always
+          env:
+          - name: DOCKER_HOST
+            value: tcp://localhost:2375
+          - name: DOCKER_TLS_CERTDIR
+            value: /certs
+          - name: AZP_URL
+            valueFrom:
+              secretKeyRef:
+                name: pipeline-auth
+                key: organizationURL     
+          - name: AZP_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: pipeline-auth
+                key:  personalAccessToken
+          - name: AZP_POOL
+            value: "<agentpool>"
+          volumeMounts:
+          - name: docker-tls-certdir
+            mountPath: /certs
+        - name: docker
+          image: docker:dind
+          command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
+          securityContext:
+            privileged: true
+          env:
+            - name: DOCKER_TLS_CERTDIR
+              value: /certs
+          volumeMounts:
+           - name: docker-tls-certdir
+             mountPath: /certs
+        volumes:
+        - name: docker-tls-certdir
+          emptyDir: {}
+  pollingInterval: 30
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  minReplicaCount: {{ .Values.ado.minReplicaCount }}
+  maxReplicaCount: {{ .Values.ado.maxReplicaCount }}
+  scalingStrategy:
+    strategy: "default"               
+  triggers:
+  - type: azure-pipelines
+    metadata:
+      poolID: {{ .Values.ado.poolID | quote }}
+      poolName: {{ .Values.ado.poolName }}
+    authenticationRef:
+     name: pipeline-trigger-auth
+{{- end  }}

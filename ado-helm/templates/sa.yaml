@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: ado
+  name: ado-service-account
   namespace: default
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: ado
+  name: ado-ClusterRole
   namespace: default
 rules:
 - apiGroups: ['*']
@@ -18,13 +18,13 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: ado
+  name: ado-clusterRole-Binding
   namespace: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: ado
+  name: ado-ClusterRole
 subjects:
 - kind: ServiceAccount
-  name: ado
+  name: ado-service-account
   namespace: default

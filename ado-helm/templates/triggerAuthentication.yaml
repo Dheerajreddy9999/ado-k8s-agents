@@ -1,0 +1,14 @@
+{{- if .Values.ado.keda.enabled }}
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: pipeline-trigger-auth
+spec:
+  secretTargetRef:
+    - parameter: personalAccessToken
+      name: pipeline-auth
+      key: personalAccessToken
+    - parameter: organizationURL
+      name: pipeline-auth
+      key: organizationURL
+{{- end }}

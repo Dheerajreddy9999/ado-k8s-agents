@@ -1,0 +1,12 @@
+ado:
+  keda:
+    enabled: true
+  image: dheerajlearningdocker/ado-k8s-agent:latest
+  pollingInterval: 1
+  minReplicaCount: 1
+  maxReplicaCount: 10
+  poolID: 10
+  poolName: linux-agent
+  personalAccessToken: 
+  organizationURL: 
+
